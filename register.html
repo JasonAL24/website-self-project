@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Commercial Cars</title>
+        <link rel="stylesheet" href="style.css">
+        <style>
+            section{
+                color: black;
+                margin-top: 10px;
+            }
+            .title{
+                margin-top: 60px;
+                display: block;
+                align-items: center;
+                justify-content: space-between;
+                margin-left: 900px;
+            }
+            form{
+                width: 100px;
+                margin-left: 600px;
+                margin-top: 40px;
+            }
+            form > *{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border:none;
+            }
+            form > div{
+                font-size:15px;
+                margin-top: 0px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+            .gender{
+                display: flex;
+                flex-direction: row;
+                margin-top: 20px;
+            }
+            #nametextbox,
+            #emailtextbox,
+            #passwordtextbox{
+                border-bottom: 1px solid black;
+                outline: none;
+                width: 700px;
+            }
+            #button{
+                align-items: center;
+                margin: 20px 305px;
+                background: rgb(19, 108, 250);
+                color: white;
+                padding: 9px 15px;
+                margin-top: 60px;
+            }
+            #city{
+                width: 700px;
+                border: 1px solid black;
+                padding: 7px;
+                align-items: center;
+            }
+            #addresstextbox{
+                width: 700px;
+                border: 1px solid black;
+                height: 40px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <a href = "index.html">
+                <div class = "img-logo">
+                    <img src = "images/logo1.gif" width="150px" height="75px">
+                </div>
+            </a>
+            <div class = "buttons">
+                <a href="login.html">
+                    <div class = "login-button">
+                        Login
+                    </div>
+                </a>
+                <a href = "register.html">
+                    <div class = "res-button">
+                        Register
+                    </div>
+                </a>
+            </div>
+        </header>
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li>
+                    <a href = "index.html">
+                        <div class = "home-button">
+                            Home
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class = "product-button">
+                        Product
+                        <div class = "product-dropdown">
+                            <a href = "product.html">
+                                Family Car
+                            </a>
+                            <a href="product.html">
+                                Commercial Car
+                            </a>
+                            <a href="product.html">
+                                Luxury Car
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href = "contact.html">
+                        <div class = "contact-button">
+                            Contact
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <section>
+            <div class="title">
+                <h1>Register</h1>
+            </div>
+            <form action="">
+                <div>Name : </div>
+                <input id="nametextbox" type="text">
+                <br>
+                <br>
+                <div>Email :</div>
+                <input id="emailtextbox" type="text">
+                <br>
+                <br>
+                <div>Gender :</div>
+                <div class = "gender">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="male">Female</label><br>
+                </div>
+                <br>
+                <div>City :</div>
+                <select id="city">
+                    <option value="blank">--Please choose your city--</option>
+                    <option value="DKI Jakarta">DKI Jakarta</option>
+                    <option value="Bogor">Bogor</option>
+                    <option value="Depok">Depok</option>
+                    <option value="Tangerang">Tangerang</option>
+                    <option value="Bekasi">Bekasi</option>
+                </select>
+                <br>
+                <div>Address :</div>
+                <input id="addresstextbox" type="text">
+                <input id="button" type="submit" value="Register">
+            </form>
+            <script>
+                var button = document.getElementById('button')
+                button.onclick = function(e){
+                    e.preventDefault();
+                    // name validation
+                    var name = document.getElementById('nametextbox');
+                    if (name.value.length == 0){
+                        alert('Your name cannot be empty');
+                    }
+
+                    // email
+                    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    var email = document.getElementById('emailtextbox');
+                    if (email.value.length == 0){
+                        alert('Your email address cannot be empty');
+                    }
+                    if (!emailRegex.test(email.value)){
+                        alert('Please Input a valid email!\n\nExample: test@abc.com');
+                    }
+
+                    //Gender validation (male or female)
+                    var male = document.getElementById('male');
+                    var female = document.getElementById('female');
+                    if ((male.checked == false) && (female.checked == false)){
+                        alert('Please select a gender!');
+                    }
+
+                    // Validation City (Cannot Be Empty!)
+                    var city = document.getElementById('city');
+                    if (city.value == 'blank'){
+                        alert('Please select a city!');
+                    }
+
+                    // Address (start with street and cant be empty)
+                    var address = document.getElementById('addresstextbox');
+                    var initialValue = "Street ";
+                    var addressSubstring = address.value.substring(0, initialValue.length);
+                    if (address.value.length == 0){
+                        alert('Address cannot be empty');
+                    }
+                    if (addressSubstring != initialValue){
+                        alert('Address must started with \"Street\"');
+                    }
+                }
+            </script>
+        </section>
+        <footer>
+            <div class = "footer-top">
+                <div class="social-media">
+                    <div>
+                        <img src = "images/instagram.png" width="25px" height="25px"/>
+                    </div>
+                    <div>
+                        <img src = "images/youtube.png" width="25px" height="25px"/>
+                    </div>
+                    <div>
+                        <img src = "images/twitter.png" width="25px" height="25px"/>
+                    </div>
+                    <div>
+                        <img src = "images/facebook.png" width="25px" height="25px"/>
+                    </div>
+                </div>
+                <div class = "subscribe">
+                    <div>Subscribe To Our Newsletter</div>
+                    <div>
+                        Your Email
+                    </div>
+                    <hr/>
+                    <div class = "subscribe-button">
+                        Subscribe
+                    </div>
+                </div>
+            </div>
+            <div class = "footer-bottom">
+                <div>
+                    &#169;Copyright 2020 by Jason Aldeo Leonard
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
