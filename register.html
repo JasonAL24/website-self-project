@@ -130,11 +130,11 @@
             </div>
             <form action="">
                 <div>Name : </div>
-                <input id="nametextbox" type="text">
+                <input id="nametextbox" type="text" placeholder="Your Name">
                 <br>
                 <br>
                 <div>Email :</div>
-                <input id="emailtextbox" type="text">
+                <input id="emailtextbox" type="text" placeholder="example@example.com">
                 <br>
                 <br>
                 <div>Gender :</div>
@@ -156,39 +156,52 @@
                 </select>
                 <br>
                 <div>Address :</div>
-                <input id="addresstextbox" type="text">
+                <input id="addresstextbox" type="text" placeholder="Street (your street)">
                 <input id="button" type="submit" value="Register">
             </form>
             <script>
                 var button = document.getElementById('button')
                 button.onclick = function(e){
                     e.preventDefault();
+                    // Default values
+                    var nameValid = 1;
+                    var emailValid = 1;
+                    var genderValid = 1;
+                    var cityValid = 1;
+                    var addressValid = 1;
+
+
                     // name validation
                     var name = document.getElementById('nametextbox');
                     if (name.value.length == 0){
                         alert('Your name cannot be empty');
+                        nameValid = 0;
                     }
 
                     // email
                     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     var email = document.getElementById('emailtextbox');
                     if (email.value.length == 0){
+                        emailValid = 0;
                         alert('Your email address cannot be empty');
                     }
                     if (!emailRegex.test(email.value)){
-                        alert('Please Input a valid email!\n\nExample: test@abc.com');
+                        emailValid = 0;
+                        alert('Please Input a valid email!\n\nExample: example@example.com');
                     }
 
                     //Gender validation (male or female)
                     var male = document.getElementById('male');
                     var female = document.getElementById('female');
                     if ((male.checked == false) && (female.checked == false)){
+                        genderValid = 0;
                         alert('Please select a gender!');
                     }
 
                     // Validation City (Cannot Be Empty!)
                     var city = document.getElementById('city');
                     if (city.value == 'blank'){
+                        cityValid = 0;
                         alert('Please select a city!');
                     }
 
@@ -197,10 +210,17 @@
                     var initialValue = "Street ";
                     var addressSubstring = address.value.substring(0, initialValue.length);
                     if (address.value.length == 0){
+                        addressValid = 0;
                         alert('Address cannot be empty');
                     }
                     if (addressSubstring != initialValue){
+                        addressValid = 0;
                         alert('Address must started with \"Street\"');
+                    }
+
+                    // If All Valid, then user will be registered.
+                    if (nameValid && emailValid && genderValid && cityValid && addressValid){
+                        alert('Thank you for registering on our website!\n\nHope you enjoy!')
                     }
                 }
             </script>
